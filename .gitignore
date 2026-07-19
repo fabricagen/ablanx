@@ -1,0 +1,6 @@
+weights/
+out/
+__pycache__/
+*.pyc
+*.npz
+*.pt

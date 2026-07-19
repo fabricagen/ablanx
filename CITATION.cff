@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+title: "ablanx: a JAX/Flax port of AbLang2"
+message: >-
+  This software is a JAX/Flax port of AbLang2 (OPIG). If you use it, please cite both
+  the original AbLang2 work and this port.
+type: software
+version: 0.1.0
+date-released: "2026-07-19"
+license: BSD-3-Clause
+authors:
+  - name: Fabricagen
+    website: "https://fabricagen.ai"
+references:
+  - type: article
+    title: >-
+      Addressing the antibody germline bias and its effect on language models for
+      improved antibody design
+    authors:
+      - family-names: Olsen
+        given-names: "Tobias H."
+      - family-names: Moal
+        given-names: "Iain H."
+      - family-names: Deane
+        given-names: "Charlotte M."
+    year: 2024
+    journal: bioRxiv
+    doi: "10.1101/2024.02.02.578678"
+  - type: software
+    title: AbLang2
+    notes: "Original model and weights (OPIG); BSD-3-Clause, Copyright (c) 2021, Tobias Hegelund Olsen."
+    authors:
+      - family-names: Olsen
+        given-names: "Tobias Hegelund"
+    repository-code: "https://github.com/oxpig/AbLang2"
+    license: BSD-3-Clause

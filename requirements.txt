@@ -1,0 +1,11 @@
+# Core JAX port (the model forward pass in ablang_jax/model.py)
+jax>=0.4.20
+jaxlib>=0.4.20
+flax>=0.7.5
+numpy>=1.24
+
+# Optional: only needed to convert the original AbLang2 weights to the Flax param
+# tree and to run ablang_jax/precompute.py. These pull in the reference PyTorch
+# AbLang2 and are not required for the JAX forward pass.
+# ablang2
+# torch
