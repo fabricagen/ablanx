@@ -46,6 +46,8 @@ Fvs, per-residue embeddings match the reference with maximum absolute difference
 1.000000, using the same weights. The weights are byte-identical to the reference AbRep state_dict (207
 tensors, exact match). Reproduce with `test_agreement.py`.
 
+![Per-residue embedding agreement between ablanx and reference AbLang2: identity scatter (cosine 1.000000) and absolute-difference distribution (max 2.5e-6).](docs/agreement.png)
+
 ## Weights
 
 The weights are the original AbLang2 AbRep weights, unmodified (207 tensors). Obtain them either way:

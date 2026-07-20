@@ -76,6 +76,8 @@ The Flax module reproduces AbLang2's AbRep so a PyTorch `state_dict` maps in dir
 | Agreement vs reference PyTorch | max abs 2.5e-6, cosine 1.000000 (`test_agreement.py`) |
 | Amino-acid likelihood head (pseudo-log-likelihood) | not ported; use reference AbLang2 for likelihoods |
 
+![ablanx vs reference AbLang2 per-residue embedding agreement: identity scatter (cosine 1.000000) and absolute-difference distribution (max 2.5e-6), one held-out VH Fv.](docs/agreement.png)
+
 ---
 
 ## 4. API
