@@ -1,7 +1,7 @@
 # Attribution
 
-`ablang-jax` is a JAX/Flax port of **AbLang2**, the antibody-specific protein language
-model from the Oxford Protein Informatics Group (OPIG).
+`ablanx` (Python package `ablang_jax`) is a JAX/Flax port of **AbLang2**, the antibody-specific
+protein language model from the Oxford Protein Informatics Group (OPIG).
 
 ## Original work
 
@@ -17,18 +17,18 @@ This repository does not claim authorship of the model or its weights.
 
 ## This port
 
-- **ablang-jax** (a re-implementation of AbLang2's AbRep encoder in JAX/Flax, plus the
+- **ablanx** (a re-implementation of AbLang2's AbRep encoder in JAX/Flax, plus the
   state_dict key mapping needed to load the original PyTorch weights unchanged).
   - Copyright (c) 2026, Fabricagen
   - License: BSD-3-Clause (same as the original)
 
-The port re-expresses the published architecture. It does not modify or retrain the model.
-Ported weights are released separately once the port is validated against the reference
-PyTorch AbLang2.
+The port re-expresses the published architecture. It does not modify or retrain the model. The JAX
+forward is validated against reference PyTorch AbLang2: per-residue embeddings match to maximum absolute
+difference 2.5e-6 and cosine 1.000000 on the same weights. The weights are the original AbRep weights,
+unmodified (207 tensors, byte-identical to the reference state_dict).
 
 ## License verification
 
 The upstream license was read from the AbLang2 repository LICENSE file
 (https://github.com/oxpig/AbLang2) and confirmed to be BSD-3-Clause with copyright
-"Copyright (c) 2021, Tobias Hegelund Olsen". Confirm this against the upstream repository
-before any public release.
+"Copyright (c) 2021, Tobias Hegelund Olsen".

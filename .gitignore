@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 *.npz
 *.pt
+# keep the committed test fixture (reference embeddings for one Fv); the 177 MB weights stay ignored
+!golden_ablang2_pert_vh.npz

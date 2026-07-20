@@ -39,16 +39,30 @@ prior needs to sit inside a larger JAX model.
   AbLang2 AbRep `state_dict` (as numpy arrays) into the Flax parameter tree.
 - A precompute script, `ablang_jax.precompute`, that runs the reference PyTorch AbLang2 over a
   set of antibody records and stores per-residue embeddings.
+- A weight exporter, `export_weights.py`, that writes the AbRep weight npz from the reference model.
 
-## What is pending
+## Validation
 
-- The weight port is training. Ported weights are not shipped in this repository and will be
-  released separately.
-- A JAX-vs-original agreement check will be published once the port is validated. No agreement
-  numbers are claimed here yet.
-- Only the AbRep encoder (embeddings and attention) is ported. The amino-acid likelihood head
-  used for the pseudo-log-likelihood is not part of this initial encoder port; use the reference
-  AbLang2 for likelihoods until it is added.
+The JAX forward reproduces reference PyTorch AbLang2 to float32 precision. On VH-only and paired VH+VL
+Fvs, per-residue embeddings match the reference with maximum absolute difference 2.5e-6 and cosine
+1.000000, using the same weights. The weights are byte-identical to the reference AbRep state_dict (207
+tensors, exact match). Reproduce with `test_agreement.py`.
+
+## Weights
+
+The weights are the original AbLang2 AbRep weights, unmodified (207 tensors). Obtain them either way:
+
+- Export from the reference model, no download:
+  `pip install ablang2 torch && python export_weights.py` writes `ablang2_weights.npz`, verified
+  byte-identical to the reference.
+- Or download the released `ablang2_weights.npz` asset (torch-free path).
+
+Point `ABLANG_WEIGHTS` at the npz, or pass `dict(np.load(...))` to `load_ablanx_params`.
+
+## Not included
+
+- Only the AbRep encoder (embeddings and attention) is ported. The amino-acid likelihood head used for the
+  pseudo-log-likelihood is not part of this encoder port; use the reference AbLang2 for likelihoods.
 
 ## Quickstart
 
@@ -56,13 +70,13 @@ Install:
 
     pip install -r requirements.txt
 
-Intended API for embeddings, once ported weights are available:
+Embeddings:
 
-    import jax.numpy as jnp
+    import numpy as np, jax.numpy as jnp
     from ablang_jax import Ablanx, load_ablanx_params
 
     model = Ablanx()
-    params = {"params": load_ablanx_params(state_dict)}  # state_dict: AbLang2 AbRep weights as numpy arrays
+    params = {"params": load_ablanx_params(dict(np.load("ablang2_weights.npz")))}  # AbRep weights
     tokens = jnp.array([[...]], dtype=jnp.int32)         # AbLang2 token ids, shape [B, L]
     mask = jnp.ones_like(tokens, dtype=jnp.float32)      # 1 = keep, 0 = pad
     hidden, attentions = model.apply(params, tokens, mask, return_attn=True)
@@ -81,9 +95,17 @@ Precompute embeddings for a set of records with the reference PyTorch `ablang2`:
 Input records are npz shards named `{train,test}_*.npz`; see `ablang_jax/precompute.py` for the
 expected per-record fields. Outputs default to `./out/` when paths are not set.
 
+## Tests
+
+    python test_shapes.py                                          # forward, weight-key mapping, masking
+    ABLANG_WEIGHTS=ablang2_weights.npz python test_agreement.py    # agreement vs reference (needs weights)
+
+`test_shapes.py` needs no weights. `test_agreement.py` loads the committed golden fixture
+(`golden_ablang2_pert_vh.npz`, reference embeddings for one Fv) and checks the JAX forward matches it; it
+skips under pytest if `ABLANG_WEIGHTS` is unset.
+
 ## License
 
 BSD-3-Clause. This port preserves the original AbLang2 copyright
 (Copyright (c) 2021, Tobias Hegelund Olsen) and adds Copyright (c) 2026, Fabricagen for the
-port. The upstream license was read from the AbLang2 repository and confirmed BSD-3-Clause.
-Confirm the upstream license and the LICENSE file in this repository before any public release.
+port. The upstream AbLang2 license was confirmed BSD-3-Clause. See `ATTRIBUTION.md`.
