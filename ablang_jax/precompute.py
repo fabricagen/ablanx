@@ -5,9 +5,8 @@ Runs the reference PyTorch AbLang2 (`pip install ablang2`) over antibody Fv sequ
 sharded .npz files and writes a per-record `seq_emb` field ([L, 480], VH then VL, residue positions
 only). These embeddings can be used as a fixed antibody sequence prior.
 
-This script uses the original PyTorch AbLang2 package, not the JAX port in this repository. The port
-exists to run the same encoder differentiably in JAX once the ported weights are available; this
-precompute path is provided so embeddings can be materialised today with the reference model.
+This uses the reference PyTorch AbLang2, not the JAX port: it materialises per-residue embeddings
+with the original model for use as a fixed antibody sequence prior.
 
 Expected input: one or more npz shards named `{split}_*.npz` (split in {train, test}) under the data
 directory, each an object-array store with per-record fields:

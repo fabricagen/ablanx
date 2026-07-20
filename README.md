@@ -1,10 +1,8 @@
 # ablanx
 
-A JAX/Flax port of AbLang2 (OPIG).
-
-This is a JAX port of AbLang2 (OPIG). The original model and weights are the work of the
-AbLang2 authors; this repository re-implements the architecture in JAX/Flax and ports the
-weights. See the original repository (https://github.com/oxpig/AbLang2) and paper
+A JAX/Flax port of AbLang2 (OPIG). The original model and weights are the work of the AbLang2
+authors; this repository re-implements the AbRep encoder in JAX/Flax and loads the original weights
+unchanged. See the upstream repository (https://github.com/oxpig/AbLang2) and paper
 (doi:10.1101/2024.02.02.578678). Full attribution is in ATTRIBUTION.md and CITATION.cff.
 
 > See also: ablanx is the language-model component of the seam bundle (a ready-to-run antibody Fv structure

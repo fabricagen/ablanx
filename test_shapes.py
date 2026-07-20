@@ -1,8 +1,8 @@
-"""Shape, weight-mapping, and masking smoke tests for the AbRep encoder port.
+"""Shape, weight-mapping, and masking smoke tests for the AbRep encoder.
 
-These do not check numerical agreement with reference AbLang2 (that needs the ported weights and is
-published with them). They check that the Flax forward runs, that `load_ablanx_params` covers the AbLang2
-AbRep state_dict keys with shape-compatible tensors, and that key masking works.
+No weights required: these run on a synthetic state_dict and check that the Flax forward runs, that
+load_ablanx_params covers the AbLang2 AbRep state_dict keys with shape-compatible tensors, and that key
+masking works. Numerical agreement against reference AbLang2 is in test_agreement.py.
 
     python -m pytest test_shapes.py
     # or: python test_shapes.py
