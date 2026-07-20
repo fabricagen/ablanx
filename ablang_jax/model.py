@@ -5,8 +5,8 @@ vocab 26) that reproduces AbLang2's AbRep so the original BSD-3-Clause PyTorch w
 unchanged. A single forward returns per-residue hidden states and per-block attention maps.
 
 PyTorch Linear weights [out, in] map to Flax Dense kernels [in, out] by transpose; see
-load_ablanx_params for the full state_dict key mapping. Outputs match reference PyTorch AbLang2 to
-2.5e-6 (test_agreement.py).
+load_ablanx_params for the full state_dict key mapping. Outputs match reference PyTorch AbLang2 to under
+4e-6 across a 30-Fv panel (test_agreement.py).
 
 AbLang2 is the work of the Oxford Protein Informatics Group; this is a port. See ATTRIBUTION.md and
 https://github.com/oxpig/AbLang2.

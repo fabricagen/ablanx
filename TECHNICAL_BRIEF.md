@@ -6,7 +6,8 @@ one differentiable JAX forward pass. Intended for antibody sequence priors that 
 model (for example the seam folder).
 
 Status: the encoder is implemented and validated against reference PyTorch AbLang2 (per-residue embeddings
-match to maximum absolute difference 2.5e-6 and cosine 1.000000 on the same weights). The weights are the
+match to maximum absolute difference 3.9e-6 and cosine above 0.999999 across a 30-Fv panel, 25 paired VH+VL
+and 5 VH-only, on the same weights). The weights are the
 original AbRep weights, unmodified. The amino-acid likelihood head (pseudo-log-likelihood) is not part of
 this encoder port.
 
@@ -73,10 +74,10 @@ The Flax module reproduces AbLang2's AbRep so a PyTorch `state_dict` maps in dir
 | Reference PyTorch precompute (`precompute.py`) | implemented |
 | Weight exporter (`export_weights.py`) | implemented |
 | Weights | original AbRep weights, unmodified (export or release) |
-| Agreement vs reference PyTorch | max abs 2.5e-6, cosine 1.000000 (`test_agreement.py`) |
+| Agreement vs reference PyTorch | max abs 3.9e-6, cosine > 0.999999 across 30 Fvs (`test_agreement.py`) |
 | Amino-acid likelihood head (pseudo-log-likelihood) | not ported; use reference AbLang2 for likelihoods |
 
-![ablanx vs reference AbLang2 per-residue embedding agreement: identity scatter (cosine 1.000000) and absolute-difference distribution (max 2.5e-6), one held-out VH Fv.](docs/agreement.png)
+![ablanx vs reference AbLang2 per-residue embedding agreement across 30 antibody Fvs: identity scatter (cosine 1.000000) and absolute-difference distribution (max 3.9e-6).](agreement.png)
 
 ---
 

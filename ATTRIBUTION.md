@@ -24,7 +24,7 @@ This repository does not claim authorship of the model or its weights.
 
 The port re-expresses the published architecture. It does not modify or retrain the model. The JAX
 forward is validated against reference PyTorch AbLang2: per-residue embeddings match to maximum absolute
-difference 2.5e-6 and cosine 1.000000 on the same weights. The weights are the original AbRep weights,
+difference 3.9e-6 and cosine above 0.999999 across a 30-Fv panel on the same weights. The weights are the original AbRep weights,
 unmodified (207 tensors, byte-identical to the reference state_dict).
 
 ## License verification

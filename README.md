@@ -41,21 +41,22 @@ prior needs to sit inside a larger JAX model.
 
 ## Validation
 
-The JAX forward reproduces reference PyTorch AbLang2 to float32 precision. On VH-only and paired VH+VL
-Fvs, per-residue embeddings match the reference with maximum absolute difference 2.5e-6 and cosine
-1.000000, using the same weights. The weights are byte-identical to the reference AbRep state_dict (207
-tensors, exact match). Reproduce with `test_agreement.py`.
+The JAX forward reproduces reference PyTorch AbLang2 to float32 precision. Across a 30-Fv panel (25 paired
+VH+VL and 5 VH-only, drawn from public PDB structures), per-residue embeddings match the reference with
+maximum absolute difference 3.9e-6 (median 2.4e-6 per Fv) and cosine above 0.999999, using the same weights.
+The weights are byte-identical to the reference AbRep state_dict (207 tensors, exact match). Reproduce with
+`test_agreement.py`.
 
-![Per-residue embedding agreement between ablanx and reference AbLang2: identity scatter (cosine 1.000000) and absolute-difference distribution (max 2.5e-6).](docs/agreement.png)
+![Per-residue embedding agreement across 30 antibody Fvs: identity scatter (cosine 1.000000) and absolute-difference distribution (max 3.9e-6).](agreement.png)
 
 ## Weights
 
-The weights are the original AbLang2 AbRep weights, unmodified (207 tensors). Obtain them either way:
+The weights are the original AbLang2 AbRep weights, unmodified (207 tensors).
 
-- Export from the reference model, no download:
+- Export from the reference model (works today, no release needed):
   `pip install ablang2 torch && python export_weights.py` writes `ablang2_weights.npz`, verified
   byte-identical to the reference.
-- Or download the released `ablang2_weights.npz` asset (torch-free path).
+- A torch-free `ablang2_weights.npz` is also attached to the GitHub release once one is tagged.
 
 Point `ABLANG_WEIGHTS` at the npz, or pass `dict(np.load(...))` to `load_ablanx_params`.
 
@@ -100,9 +101,9 @@ expected per-record fields. Outputs default to `./out/` when paths are not set.
     python test_shapes.py                                          # forward, weight-key mapping, masking
     ABLANG_WEIGHTS=ablang2_weights.npz python test_agreement.py    # agreement vs reference (needs weights)
 
-`test_shapes.py` needs no weights. `test_agreement.py` loads the committed golden fixture
-(`golden_ablang2_pert_vh.npz`, reference embeddings for one Fv) and checks the JAX forward matches it; it
-skips under pytest if `ABLANG_WEIGHTS` is unset.
+`test_shapes.py` needs no weights. `test_agreement.py` loads the committed golden panel
+(`golden_ablang2_panel.npz`, reference embeddings for 30 Fvs) and checks the JAX forward matches every one;
+it skips under pytest if `ABLANG_WEIGHTS` is unset.
 
 ## License
 
