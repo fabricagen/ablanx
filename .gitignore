@@ -4,5 +4,8 @@ __pycache__/
 *.pyc
 *.npz
 *.pt
+dist/
+build/
+*.egg-info/
 # keep the committed golden panel (reference embeddings for 30 Fvs); the 177 MB weights stay ignored
 !golden_ablang2_panel.npz
