@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ablanx"
+version = "0.1.0"
+description = "JAX/Flax port of AbLang2's AbRep encoder: antibody language-model embeddings and per-block attention."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "BSD-3-Clause" }
+authors = [{ name = "Fabricagen" }]
+keywords = ["jax", "flax", "antibody", "protein-language-model", "ablang", "ablang2"]
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    "jax>=0.4.20",
+    "jaxlib>=0.4.20",
+    "flax>=0.7.5",
+    "numpy>=1.24",
+]
+
+# Reference PyTorch AbLang2, needed only to export weights or run precompute (not for inference).
+[project.optional-dependencies]
+reference = ["ablang2", "torch"]
+
+[project.urls]
+Homepage = "https://github.com/fabricagen/ablanx"
+Repository = "https://github.com/fabricagen/ablanx"
+
+[tool.setuptools]
+packages = ["ablang_jax"]
