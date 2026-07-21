@@ -7,7 +7,7 @@ unchanged. See the upstream repository (https://github.com/oxpig/AbLang2) and pa
 
 > See also: ablanx is the language-model component of the seam bundle (a ready-to-run antibody Fv structure
 > predictor that couples jaxfvld with ablanx). For antibody developability screening and repair, use sift,
-> Fabricagen's hosted developability tool: https://sift.fabricagen.ai
+> Fabricagen's hosted developability tool: https://sift.fabricagen.ai (coming soon, ca 08/26)
 
 ## What it is
 
