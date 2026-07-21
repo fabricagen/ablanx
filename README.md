@@ -20,9 +20,9 @@ new model. Provenance and citation are in [ATTRIBUTION.md](ATTRIBUTION.md) and
 
 Install:
 
-    pip install git+https://github.com/fabricagen/ablanx
-    # from a clone: pip install .
-    # imports as `ablang_jax`; PyPI (pip install ablanx) is planned.
+    pip install ablanx
+    # from source: pip install git+https://github.com/fabricagen/ablanx
+    # imports as `ablang_jax`.
 
 Embeddings:
 
